@@ -17,11 +17,13 @@ describe('second', () => {
       ],
     });
 
-    await deployments.fixture(['fourth_main']);
+    await deployments.fixture(['second_main']);
     const [ deployer ] = await ethers.getSigners();
     const secondDeployment = await deployments.get('Second');
     const second = await ethers.getContractAt("Second", secondDeployment.address);
 
-    console.log(await ethers.getBlock());
+    console.log(web3);
+
+    console.log(await ethers.provider.getBlock());
   });
 });

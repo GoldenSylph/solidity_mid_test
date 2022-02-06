@@ -5,11 +5,60 @@ pragma solidity ^0.8.0;
  * @title RLPEncode
  * @dev A simple RLP encoding library.
  * @author Bakaoh (https://github.com/bakaoh/solidity-rlp-encode/blob/master/contracts/RLPEncode.sol)
+ * @author Oleg Bedrin (some additional functions and the struct)
  */
 library RLPEncode {
+
+    struct BlockHeader {
+
+        // The header is encapsulated into the groups to avoid stack overflow
+
+        // bytes32 parentHash;
+        // bytes32 ommersHash;
+        bytes32[2] firstGroup;
+
+        address beneficiary;
+
+        // bytes32 stateRoot;
+        // bytes32 receiptsRoot;
+        // bytes32 logsBloom;
+        bytes32[3] secondGroup;
+
+        // uint256 difficulty;
+        // uint256 number;
+        // uint256 gasLimit;
+        // uint256 gasUsed;
+        // uint256 timestamp;
+        uint256[5] thirdGroup;
+
+        bytes extraData;
+        bytes32 mixHash;
+        uint64 nonce;
+        uint256 baseFeePerGas;
+    }
+
     /*
      * Internal functions
      */
+
+     function encodeBlockHeader(BlockHeader memory self) internal pure returns (bytes memory) {
+          bytes[] memory selfBytes = new bytes[](8);
+          for (uint256 i = 0; i < 2; i++) {
+              selfBytes[i] = abi.encodePacked(self.firstGroup[i]);
+          }
+          selfBytes[2] = abi.encodePacked(self.beneficiary);
+          for (uint256 i = 2; i >= 2 && i < 6; i++) {
+              selfBytes[i] = abi.encodePacked(self.secondGroup[i]);
+          }
+          for (uint256 i = 6; i >= 6 && i < 11; i++) {
+              selfBytes[i] = abi.encodePacked(self.thirdGroup[i]);
+          }
+          selfBytes[12] = self.extraData;
+          selfBytes[13] = abi.encodePacked(self.mixHash);
+          selfBytes[14] = abi.encodePacked(self.nonce);
+          selfBytes[15] = abi.encodePacked(self.baseFeePerGas);
+          return encodeList(selfBytes);
+     }
 
     /**
      * @dev RLP encodes a byte string.

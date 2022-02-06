@@ -24,7 +24,11 @@ You can test the first task by executing `npx hardhat test`. It will fork the Fu
 
 ## Second task
 
+The `checkBlockHeader` function of the `Second` contract is acquiring the block hash of the specific block number and accepts custom made struct of the Ethereum Mainnet block header. The specific content of the block header is described at the Yellow Paper in part 4.3.
 
+Then I found an `RLPEncode` contract which can RLP encode onchain, and it is made by some nice guy from the internet. His github reference is in NatSpec of the contract. I just made some wrapper function so the struct could fit in his RLP encoder methods. I also remembered that in block header of London hardfork there is an additional field called `baseFeePerGas`. It is required to burn some fees to maintain some economical issues of the Ether.
+
+You can test the second task by executing `npx hardhat test`. It will fork the Ethereum mainnet and execute the test.
 
 ## Third task
 
