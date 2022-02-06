@@ -2,6 +2,20 @@
 
 ## .env Configuraion
 
+Before you get to testing you have to create at the root of the project file called `.env`.
+
+Then you must fill it:
+
+```
+ALCHEMY_KOVAN="<ALCHEMY KOVAN PROJECT API KEY>"
+ALCHEMY_GOERLI="<ALCHEMY GOERLI PROJECT API KEY>"
+ALCHEMY_RINKEBY="<ALCHEMY RINKEBY PROJECT API KEY>"
+ALCHEMY_MAINNET="<ALCHEMY MAINNET PROJECT API KEY>"
+MNEMONIC="<YOUR 12 WORLD MNEMONIC OF HD WALLET>"
+ETHERSCAN_API_KEY="<YOUR ETHERSCAN API KEY>"
+REPORT_GAS="true"
+```
+
 ## First task
 
 Firstly read docs, found about consensus contract (cause Fuse is DPoS). Then found proxy of the contact. Did research of the ABI of implementation begind the proxy. By the way, Eternal Storage as upgradability pattern sucks. Did the setup of the project based on my personal template. Then built the contract at `contracts/first/First.sol` and an interface `contracts/first/ICoreConsensus.sol` which declares two methods that I need to: check if an address is validator and to obtain some validator address to impersonate. Then I wrote a test which tries to call secured method `testModifier` as non-validator and as validator signer.
