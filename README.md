@@ -1,5 +1,7 @@
 # Solidity Mid Test
 
+## .env Configuraion
+
 ## First task
 
 Firstly read docs, found about consensus contract (cause Fuse is DPoS). Then found proxy of the contact. Did research of the ABI of implementation begind the proxy. By the way, Eternal Storage as upgradability pattern sucks. Did the setup of the project based on my personal template. Then built the contract at `contracts/first/First.sol` and an interface `contracts/first/ICoreConsensus.sol` which declares two methods that I need to: check if an address is validator and to obtain some validator address to impersonate. Then I wrote a test which tries to call secured method `testModifier` as non-validator and as validator signer.
@@ -21,3 +23,10 @@ This is part of the functions executions where the business logic is. To the lef
 You can also check that the A variant is more expensive by executing `npx hardhat test`. It will fork the Fuse mainnet (just for fun and for not performing an unnecessary work on network management) and execute test.
 
 ## Fourth task
+
+I made some calculations. Firstly, let's consider the constant product of reserves formula `x * y = k`. The swap in this case is `(x + a) * (y - b) = k`.
+The `a` and `b` are the input and the output of the swap. Consider the price impact `I` in percents [0, 100]. The current price is `p = x / y`. The price after possible impact is `p * I / 100`. Here are some explanation page down below.
+
+Firstly, I am defining the variables and build the formula for `a` in terms of the price after impact and the output of swap. Then goes an equation from which I will extract maximum possible `b` after price impact.
+
+![The explanation](./explanation.png)
