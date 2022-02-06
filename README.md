@@ -10,4 +10,14 @@ You can test the first task by executing `npx hardhat test`. It will fork the Fu
 
 ## Third task
 
+1. `Is there a difference in gas efficiency between the two ways to return the person age?` - Yes, because the A variant is allocating a reference type variable in memory and additionally performing assignment operation. But the B variant is just storing the result of storage read in stack and then just passing it to the end return mechanism of the contract.
+
+Here is an OPCODE analysis of both variants:
+
+![The OPCODE analysis of the variants](./third_ref.png)
+
+This is part of the functions executions. To the left is the execution of B variant and to the opposite side is A variant. You can see, that in the variant A there is much more MLOADs and MSTOREs OPCODE which read and allocate the memory for the `p` variable.
+
+You can test the third task by executing `npx hardhat test`. It will fork the Fuse mainnet (just for fun and for not performing an unnecessary work on network management) and execute test.
+
 ## Fourth task

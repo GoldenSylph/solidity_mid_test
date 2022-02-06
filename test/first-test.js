@@ -15,7 +15,7 @@ describe('first', () => {
     await deployments.fixture(['first_main']);
     const { deployer } = await getNamedAccounts();
     const firstDeployment = await deployments.get('First');
-    first = new ethers.Contract(firstDeployment.address, firstDeployment.abi, ethers.provider);
+    first = await hre.ethers.getContractAt("First", firstDeployment.address);
     consensus = await hre.ethers.getContractAt("ICoreConsensus", consensysProxyFuseAddress);
 
     const someValidator = await consensus.currentValidatorsAtPosition(0);
