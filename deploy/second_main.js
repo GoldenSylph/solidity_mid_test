@@ -16,6 +16,13 @@ module.exports = async ({
 
   const { deploy, save } = deployments;
   const { deployer, alice, bob } = await getNamedAccounts();
+
+  const second = await deploy("Second", {
+      from: deployer,
+      skipIfAlreadyDeployed: skipDeploymentIfAlreadyDeployed,
+      log: true
+    }
+  );
 }
 module.exports.tags = ["second_main"]
 module.exports.runAtTheEnd = true;

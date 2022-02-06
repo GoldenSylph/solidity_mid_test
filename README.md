@@ -20,9 +20,11 @@ REPORT_GAS="true"
 
 Firstly read docs, found about consensus contract (cause Fuse is DPoS). Then found proxy of the contact. Did research of the ABI of implementation begind the proxy. By the way, Eternal Storage as upgradability pattern sucks. Did the setup of the project based on my personal template. Then built the contract at `contracts/first/First.sol` and an interface `contracts/first/ICoreConsensus.sol` which declares two methods that I need to: check if an address is validator and to obtain some validator address to impersonate. Then I wrote a test which tries to call secured method `testModifier` as non-validator and as validator signer.
 
-You can test the first task by executing `npx hardhat test`. It will fork the Fuse mainnet and execute test.
+You can test the first task by executing `npx hardhat test`. It will fork the Fuse mainnet and execute the test.
 
 ## Second task
+
+
 
 ## Third task
 
@@ -34,7 +36,7 @@ You can test the first task by executing `npx hardhat test`. It will fork the Fu
 
 This is part of the functions executions where the business logic is. To the left is the execution of B variant and to the opposite side is A variant. You can see, that in the variant A there is much more MLOADs and MSTOREs OPCODE which read and allocate the memory for the `p` variable. The main difference is at the center of both variants. You can see that in the A variant is an allocation block for the variable, instead of just adding the reference to storage at mark `259 SLOAD` in the variant B.
 
-You can also check that the A variant is more expensive by executing `npx hardhat test`. It will fork the Fuse mainnet (just for fun and for not performing an unnecessary work on network management) and execute test.
+You can also check that the A variant is more expensive by executing `npx hardhat test`. It will fork the Fuse mainnet (just for fun and for not performing an unnecessary work on network management) and execute the test.
 
 ## Fourth task
 
@@ -44,3 +46,5 @@ The `a` and `b` are the input and the output of the swap. Consider the price imp
 Firstly, I am defining the variables and build the formula for `a` in terms of the price after impact and the output of swap. Then goes an equation from which I will extract maximum possible `b` after price impact.
 
 ![The explanation](./explanation.jpg)
+
+You can test the first task by executing `npx hardhat test`. It will fork the Ethereum mainnet and execute the test.
