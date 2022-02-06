@@ -29,4 +29,4 @@ The `a` and `b` are the input and the output of the swap. Consider the price imp
 
 Firstly, I am defining the variables and build the formula for `a` in terms of the price after impact and the output of swap. Then goes an equation from which I will extract maximum possible `b` after price impact.
 
-![The explanation](./explanation.png)
+![The explanation](./explanation.jpg)
