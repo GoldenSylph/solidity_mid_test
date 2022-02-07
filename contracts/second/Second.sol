@@ -6,9 +6,11 @@ import "./RLPEncode.sol";
 contract Second {
     using RLPEncode for RLPEncode.BlockHeader;
 
-    function checkBlockHeader(RLPEncode.BlockHeader calldata blockHeader, uint256 blockNumber) external view returns(bool) {
-        bytes32 expectedBlockHash = blockhash(blockNumber);
+    function checkBlockHeader(RLPEncode.BlockHeader calldata blockHeader, bytes32 expectedBlockHash) external view returns(bool) {
+        // console.logBytes(blockHeader.encodeBlockHeader());
         bytes32 actualBlockHash = keccak256(blockHeader.encodeBlockHeader());
+        console.log("---");
+        console.logBytes32(actualBlockHash);
         return expectedBlockHash == actualBlockHash;
     }
 
