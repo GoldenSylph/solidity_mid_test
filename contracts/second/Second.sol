@@ -9,9 +9,8 @@ contract Second {
     function checkBlockHeader(RLPEncode.BlockHeader calldata blockHeader, bytes32 expectedBlockHash) external view returns(bool) {
         // console.logBytes(blockHeader.encodeBlockHeader());
         bytes32 actualBlockHash = keccak256(blockHeader.encodeBlockHeader());
-        console.log("---");
-        console.logBytes32(actualBlockHash);
+        // console.log("---");
+        // console.logBytes32(actualBlockHash);
         return expectedBlockHash == actualBlockHash;
     }
-
 }

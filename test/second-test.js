@@ -46,12 +46,14 @@ describe('second', () => {
       ethersBlockInfo.extraData,
       web3BlockInfo.mixHash,
       ethers.BigNumber.from(web3BlockInfo.nonce).toHexString(),
-      ethersBlockInfo.baseFeePerGas.toHexString()
+      ethersBlockInfo.baseFeePerGas.toHexString(),
+      web3BlockInfo.transactions,
+      web3BlockInfo.uncles
     ];
 
     const rlpExpected = ethers.utils.RLP.encode(blockHeaderExpectedPayload);
+    console.log(rlpExpected);
     console.log(blockHeaderExpectedPayload);
-    // console.log(rlpExpected);
     console.log(ethers.utils.keccak256(rlpExpected));
 
     const blockHeaderPayload = [
@@ -62,6 +64,7 @@ describe('second', () => {
         web3BlockInfo.miner,
         [
           web3BlockInfo.stateRoot,
+          web3BlockInfo.transactionsRoot,
           web3BlockInfo.receiptsRoot,
         ],
         web3BlockInfo.logsBloom,

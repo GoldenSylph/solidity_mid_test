@@ -22,8 +22,9 @@ library RLPEncode {
         address beneficiary;
 
         // bytes32 stateRoot;
+        // bytes32 transactionsRoot;
         // bytes32 receiptsRoot;
-        bytes32[2] secondGroup;
+        bytes32[3] secondGroup;
 
         bytes logsBloom;
         // uint256 difficulty;
@@ -44,22 +45,22 @@ library RLPEncode {
      */
 
      function encodeBlockHeader(BlockHeader memory self) internal view returns (bytes memory) {
-          bytes[] memory selfBytes = new bytes[](15);
+          bytes[] memory selfBytes = new bytes[](16);
           for (uint256 i = 0; i < 2; i++) {
               selfBytes[i] = abi.encodePacked(self.firstGroup[i]);
           }
           selfBytes[2] = abi.encodePacked(self.beneficiary);
-          for (uint256 i = 3; i >= 3 && i < 5; i++) {
+          for (uint256 i = 3; i >= 3 && i < 6; i++) {
               selfBytes[i] = abi.encodePacked(self.secondGroup[i - 3]);
           }
-          selfBytes[5] = self.logsBloom;
+          selfBytes[6] = self.logsBloom;
           for (uint256 i = 0; i < self.thirdGroup.length; i++) {
-              selfBytes[i + 6] = toBinary(self.thirdGroup[i]);
+              selfBytes[i + 7] = toBinary(self.thirdGroup[i]);
           }
-          selfBytes[11] = self.extraData;
-          selfBytes[12] = abi.encodePacked(self.mixHash);
-          selfBytes[13] = toBinary(self.nonce);
-          selfBytes[14] = toBinary(self.baseFeePerGas);
+          selfBytes[12] = self.extraData;
+          selfBytes[13] = abi.encodePacked(self.mixHash);
+          selfBytes[14] = toBinary(self.nonce);
+          selfBytes[15] = toBinary(self.baseFeePerGas);
           return encodeList(selfBytes);
      }
 
